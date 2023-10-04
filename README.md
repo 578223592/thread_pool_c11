@@ -1,24 +1,7 @@
 # thread_pool_c11
 
-todo:websever星球解读已经差不多看懂了，待再复习复习，手撕，总结！！！
-
-预计要花个四五小时了。。。
-
-
-
-> 主要参考文章：https://zhuanlan.zhihu.com/p/367309864
-> 
-> 这个博主还有些其他文章干活满满
-
-学习线程池的过程中发现其中有很多c11的特性需要学习，并不简单
-
-## 前置知识
-
-```c++
-template<typename F, typename... Args>
-auto enqueue(F &&f, Args &&...args); // 入队接口
-```
-
-
-
-std::future 用于异步获取返回值
+c11通用的可以接受任意任务的异步线程池
+本项目主要用于webserver的优化:处理异步的一些无关紧要但是耗时的任务,这里也是模仿的redis：
+- 关闭文件
+- Redis中是unlink，可以使用线程池来管理LFU的缓存部分释放内存，将free任务交给线程池异步处理
+- 其他可以异步执行的程序
