@@ -60,7 +60,7 @@ public:
 
     Node() : val(0), left(nullptr), right(nullptr), next(nullptr) {}
 
-    Node(int _val) : val(_val), left(NULL), right(NULL), next(NULL) {}
+    explicit Node(int _val) : val(_val), left(nullptr), right(nullptr), next(nullptr) {}
 
     Node(int _val, Node *_left, Node *_right, Node *_next)
             : val(_val), left(_left), right(_right), next(_next) {}
@@ -73,7 +73,7 @@ struct TreeNode
     TreeNode *left;
     TreeNode *right;
     TreeNode() : val(0), left(nullptr), right(nullptr) {}
-    TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
+    explicit TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
 };
 
@@ -82,7 +82,7 @@ struct ListNode
 {
     int val;
     ListNode *next;
-    ListNode(int x) : val(x), next(nullptr) {}
+    explicit ListNode(int x) : val(x), next(nullptr) {}
 };
 
 // 算法 start
@@ -93,15 +93,15 @@ struct ListNode
 // 负责存在任务，即 function<void()>
 // 对外暴露三个接口：size enqueue dequeue
 template <typename T>
-class ThreadSafeDeuqe
+class ThreadSafeDeque
 {
 private:
     queue<T> queue_;
     mutex mutex_;
 
 public:
-    ThreadSafeDeuqe(/* args */);
-    ~ThreadSafeDeuqe();
+    ThreadSafeDeque(/* args */);
+    ~ThreadSafeDeque();
 
 public:
     size_t size();
@@ -109,31 +109,29 @@ public:
     bool dequeue(T &t);
 };
 template <typename T>
-ThreadSafeDeuqe<T>::ThreadSafeDeuqe(/* args */)
-{
-}
+ThreadSafeDeque<T>::ThreadSafeDeque(/* args */)
+= default;
 
 template <typename T>
-ThreadSafeDeuqe<T>::~ThreadSafeDeuqe()
-{
-}
+ThreadSafeDeque<T>::~ThreadSafeDeque()
+= default;
 
 template <typename T>
-size_t ThreadSafeDeuqe<T>::size()
+size_t ThreadSafeDeque<T>::size()
 {
     lock_guard<mutex> lock1(mutex_);
     return queue_.size();
 }
 
 template <typename T>
-void ThreadSafeDeuqe<T>::enqueue(T &t)
+void ThreadSafeDeque<T>::enqueue(T &t)
 {
     lock_guard<mutex> lock1(mutex_);
     queue_.push(move(t));
 }
 
 template <typename T>
-bool ThreadSafeDeuqe<T>::dequeue(T &t)
+bool ThreadSafeDeque<T>::dequeue(T &t)
 {
     lock_guard<mutex> lock1(mutex_);
     if (queue_.size() == 0)
@@ -161,7 +159,7 @@ private:
         ThreadPool *pool_; // 要返过去拿到线程池才能拿到其条件变量和锁
     public:
         ThreadWorker(int id, ThreadPool *ofPool);
-        ~ThreadWorker();
+        ~ThreadWorker() = default;
         void operator()(); // 重载需要完成的事情，循环去拿任务，然后完成，任务是function<void()>
     };
 
@@ -174,7 +172,7 @@ public:
     mutex conditionVariableMutex_; // 这个锁的目的是和条件变量配合唤醒，任务队列已经是安全的了，主要是给子线程用，不是当前使用的
     bool stop_;
     vector<thread> workerVt_;                     // 注意保存是线程而不是worker本身
-    ThreadSafeDeuqe<function<void()>> safeQueue_; // 任务存放的都是function<void()> 类型
+    ThreadSafeDeque<function<void()>> safeQueue_; // 任务存放的都是function<void()> 类型
 public:
     // start 禁止拷贝
     ThreadPool(const ThreadPool &) = delete;
@@ -192,57 +190,7 @@ public:
     auto submit(F &&f, Args &&...args) -> future<decltype(f(args...))>; // 最难得函数，语法糖是最多的
 };
 
-ThreadPool::ThreadWorker::~ThreadWorker() = default;
 
-ThreadPool::ThreadWorker::ThreadWorker(int id, ThreadPool *ofPool) : id_(id), pool_(ofPool){
-
-}
-
-//拿到锁，然后陷入沉睡,等待唤醒
-void ThreadPool::ThreadWorker::operator()()
-{
-    function<void()> thisTask;
-    while (!pool_->stop_){
-        bool dequeued = false;
-        {
-            unique_lock<mutex> lock1(pool_->conditionVariableMutex_);
-            if(pool_->safeQueue_.size()==0){
-                pool_->conditionVariable_.wait(lock1);  //使用mutex和条件变量的使用套路，要记住
-            }
-            //出来之后可能是能取出，可能不能取出（比如已经停止了），要判断
-            dequeued = pool_->safeQueue_.dequeue(thisTask);
-        }
-        if(dequeued){
-            thisTask();
-        }
-    }
-}
-
-// 1.stop赋值为false 2.创建工作线程
-ThreadPool::ThreadPool(int threadsNum) : stop_(false)
-{
-    for (int i = 0; i < threadsNum; ++i)
-    {
-        workerVt_.emplace_back(thread(ThreadWorker(i, this)));
-    }
-}
-// 这个的设计待考虑
-ThreadPool::~ThreadPool()
-{
-}
-
-void ThreadPool::shutdown()
-{
-    stop_ = true;
-    conditionVariable_.notify_all();
-    for (int i = 0; i < workerVt_.size(); ++i)
-    {
-        if (workerVt_.at(i).joinable())  //如果还在执行，则等待当前执行的任务结束，还没有执行的就不管
-        {
-            workerVt_.at(i).join();
-        }
-    }
-}
 
 //大概步骤：先通过bind绑定成一个function，然后通过packaged_task得到保存packaged_task的shared_ptr
 //要shared_ptr的原因是这有两处要使用：1.加入任务队列；2.返回future
