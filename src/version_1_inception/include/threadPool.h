@@ -85,10 +85,6 @@ struct ListNode
     explicit ListNode(int x) : val(x), next(nullptr) {}
 };
 
-// 算法 start
-
-// 算法 end
-
 // 积木1：任务队列
 // 负责存在任务，即 function<void()>
 // 对外暴露三个接口：size enqueue dequeue
@@ -162,8 +158,6 @@ private:
         ~ThreadWorker() = default;
         void operator()(); // 重载需要完成的事情，循环去拿任务，然后完成，任务是function<void()>
     };
-
-
 
 
 

@@ -15,7 +15,13 @@ include_directories(${PROJECT_SOURCE_DIR}/src/version_1_inception/include)
 # 设置项目库文件搜索路径 -L
 link_directories(${PROJECT_SOURCE_DIR}/lib)
 
-# src包含了mprpc框架所有的相关代码
-#add_subdirectory(src)
-# example包含了mprpc框架使用的示例代码
+# src包含了所有源代码
+add_subdirectory(src)
+add_subdirectory(tests)
+
 #add_subdirectory(example)
+
+
+
+add_executable(performanceTest tests/performance.cpp)
+target_link_libraries(performanceTest version_1_inception)
