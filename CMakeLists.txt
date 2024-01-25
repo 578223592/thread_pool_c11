@@ -1,9 +1,15 @@
 # 设置cmake的最低版本和项目名称
 cmake_minimum_required(VERSION 3.0)
-project(mprpc)
+project(highPerfThreadPool
+        VERSION 1.0
+        LANGUAGES CXX)
 
 # 生成debug版本，可以进行gdb调试
 set(CMAKE_BUILD_TYPE "Debug")
+
+#设置c++标准版本
+set(CMAKE_CXX_STANDARD 23)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 # 设置项目可执行文件输出的路径
 set(EXECUTABLE_OUTPUT_PATH ${PROJECT_SOURCE_DIR}/bin)
@@ -21,7 +27,19 @@ add_subdirectory(tests)
 
 #add_subdirectory(example)
 
+#拉取nanoFetch
+include(FetchContent)
 
+FetchContent_Declare(
+        nanobench
+        GIT_REPOSITORY https://github.com/martinus/nanobench.git
+        GIT_TAG v4.1.0
+        GIT_SHALLOW TRUE)
+
+FetchContent_MakeAvailable(nanobench)
+#拉取nanoFetch end
 
 add_executable(performanceTest tests/performance.cpp)
-target_link_libraries(performanceTest version_1_inception)
+target_link_libraries(performanceTest PRIVATE version_1_inception nanobench)
+
+
