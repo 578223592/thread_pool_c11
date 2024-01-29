@@ -40,6 +40,6 @@ FetchContent_MakeAvailable(nanobench)
 #拉取nanoFetch end
 
 add_executable(performanceTest tests/performance.cpp)
-target_link_libraries(performanceTest PRIVATE version_1_inception nanobench)
+target_link_libraries(performanceTest PRIVATE version_1_inception version_2_high_performace nanobench)
 
 

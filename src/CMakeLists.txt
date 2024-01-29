@@ -1,3 +1,4 @@
 
 
 add_subdirectory(version_1_inception)
+add_subdirectory(version_2_high_performace)

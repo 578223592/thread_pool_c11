@@ -11,7 +11,9 @@
   </component>
   <component name="CMakeRunConfigurationManager">
     <generated>
+      <config projectName="highPerfThreadPool" targetName="nanobench" />
       <config projectName="highPerfThreadPool" targetName="version_1_inception" />
+      <config projectName="highPerfThreadPool" targetName="version_2_high_performace" />
       <config projectName="highPerfThreadPool" targetName="performanceTest" />
     </generated>
   </component>
@@ -20,14 +22,17 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="94712c20-9a55-4f09-bf05-4ab1aa256cc6" name="更改" comment="">
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.name" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.name" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/version_2_high_performace/CMakeLists.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/version_2_high_performace/include/threadPool.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/version_2_high_performace/threadPool.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeLists.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/docs/涉及的新特性总结.md" beforeDir="false" afterPath="$PROJECT_DIR$/docs/涉及的新特性总结.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/src/CMakeLists.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/version_1_inception/include/originalThreadPool.h" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/version_1_inception/include/threadPool.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/version_1_inception/include/threadPool.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/version_1_inception/threadPool.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/version_1_inception/threadPool.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/tests/CMakeLists.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/tests/performance.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/tests/performance.cpp" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -89,10 +94,11 @@
     "RunOnceActivity.cidr.known.project.marker": "true",
     "RunOnceActivity.readMode.enableVisualFormatting": "true",
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "cf.advertisement.text.has.clang-format": "true",
     "cf.first.check.clang-format": "false",
     "cidr.known.project.marker": "true",
     "git-widget-placeholder": "main",
-    "last_opened_file_path": "/home/swx/2023_project/thread_pool_c11/build",
+    "last_opened_file_path": "/home/swx/2023_project/thread_pool_c11/src",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -102,10 +108,20 @@
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src" />
+    </key>
+  </component>
   <component name="RunManager" selected="CMake 应用程序.performanceTest">
-    <configuration default="true" type="CLionExternalRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true">
+    <configuration default="true" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true">
       <method v="2">
-        <option name="CLION.EXTERNAL.BUILD" enabled="true" />
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="nanobench" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="highPerfThreadPool" TARGET_NAME="nanobench" CONFIG_NAME="Debug">
+      <method v="2">
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
       </method>
     </configuration>
     <configuration name="performanceTest" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="highPerfThreadPool" TARGET_NAME="performanceTest" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="highPerfThreadPool" RUN_TARGET_NAME="performanceTest">
@@ -118,9 +134,16 @@
         <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
       </method>
     </configuration>
+    <configuration name="version_2_high_performace" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="highPerfThreadPool" TARGET_NAME="version_2_high_performace" CONFIG_NAME="Debug">
+      <method v="2">
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
     <list>
       <item itemvalue="CMake 应用程序.performanceTest" />
+      <item itemvalue="CMake 应用程序.nanobench" />
       <item itemvalue="CMake 应用程序.version_1_inception" />
+      <item itemvalue="CMake 应用程序.version_2_high_performace" />
     </list>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="应用程序级" UseSingleDictionary="true" transferred="true" />
@@ -136,6 +159,9 @@
       <workItem from="1706169554529" duration="1535000" />
       <workItem from="1706171105580" duration="46000" />
       <workItem from="1706171166556" duration="12583000" />
+      <workItem from="1706347659209" duration="286000" />
+      <workItem from="1706358839955" duration="2016000" />
+      <workItem from="1706517046825" duration="5200000" />
     </task>
     <servers />
   </component>
