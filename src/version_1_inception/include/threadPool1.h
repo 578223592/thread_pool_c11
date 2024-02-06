@@ -2,8 +2,8 @@
 // Created by swx on 23-8-10.
 //
 
-#ifndef THREAD_POOL_C11_THREADPOOL_H
-#define THREAD_POOL_C11_THREADPOOL_H
+#ifndef THREAD_POOL_C11_THREADPOOL_H_version_1
+#define THREAD_POOL_C11_THREADPOOL_H_version_1
 #include <vector>
 #include <queue>
 #include <memory>

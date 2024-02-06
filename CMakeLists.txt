@@ -16,8 +16,9 @@ set(EXECUTABLE_OUTPUT_PATH ${PROJECT_SOURCE_DIR}/bin)
 # 设置项目库文件输出的路径
 set(LIBRARY_OUTPUT_PATH ${PROJECT_SOURCE_DIR}/lib)
 
-# 设置项目编译头文件搜索路径 -I
+# 设置项目编译头文件搜索路径 -I   todo 可能存在命名空间污染的问题，用target_include_xxx 来试试 参考pika
 include_directories(${PROJECT_SOURCE_DIR}/src/version_1_inception/include)
+include_directories(${PROJECT_SOURCE_DIR}/src/version_2_high_performace/include)
 # 设置项目库文件搜索路径 -L
 link_directories(${PROJECT_SOURCE_DIR}/lib)
 
