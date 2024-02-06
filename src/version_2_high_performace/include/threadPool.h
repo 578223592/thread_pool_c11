@@ -8,6 +8,8 @@
 #include <thread>
 #include "threadPoolConfig.h"
 #include "UThreadPrimary.h"
+#include "UAtomicQueue.h"
+#include "UTask.h"
 
 namespace version_2_high_performace {
     /**
